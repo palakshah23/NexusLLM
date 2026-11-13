@@ -704,17 +704,3 @@ All these checks must pass before your PR can be merged.
 - [Community Slack 💭](https://www.litellm.ai/support)
 - Our emails ✉️ ishaan@berri.ai / krrish@berri.ai
 
-# Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-<a href="https://github.com/BerriAI/litellm/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=BerriAI/litellm" />
-</a>
