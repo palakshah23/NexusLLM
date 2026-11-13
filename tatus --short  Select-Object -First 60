@@ -1,0 +1,272 @@
+ .cargo/config.toml                                 |     22 [32m+[m
+ .circleci/config.yml                               |   3531 [32m+[m
+ .circleci/scripts/classify_changes.sh              |     77 [32m+[m
+ .circleci/scripts/path_filter.sh                   |     40 [32m+[m
+ .circleci/scripts/prepare_replica_roles.py         |     52 [32m+[m
+ .circleci/scripts/run_integration.sh               |    259 [32m+[m
+ .circleci/scripts/run_migration_tests.py           |    116 [32m+[m
+ .circleci/scripts/stop_integration_processes.py    |     53 [32m+[m
+ .circleci/scripts/verify_integration_browser.py    |     60 [32m+[m
+ .circleci/scripts/wait_integration_services.py     |     43 [32m+[m
+ .devcontainer/devcontainer.json                    |     57 [32m+[m
+ .devcontainer/post-create.sh                       |     17 [32m+[m
+ .dockerignore                                      |     58 [32m+[m
+ .env.example                                       |     32 [32m+[m
+ .git-blame-ignore-revs                             |     40 [32m+[m
+ .gitattributes                                     |      2 [32m+[m
+ .gitguardian.yaml                                  |    106 [32m+[m
+ .githooks/commit-msg                               |     75 [32m+[m
+ .githooks/pre-push                                 |     90 [32m+[m
+ .github/CODEOWNERS                                 |      2 [32m+[m
+ .github/FUNDING.yml                                |     13 [32m+[m
+ .github/ISSUE_TEMPLATE/bug_report.yml              |     79 [32m+[m
+ .github/ISSUE_TEMPLATE/config.yml                  |      8 [32m+[m
+ .github/ISSUE_TEMPLATE/feature_request.yml         |    122 [32m+[m
+ .github/PULL_REQUEST_TEMPLATE/general.md           |    166 [32m+[m
+ .github/PULL_REQUEST_TEMPLATE/rust.md              |      1 [32m+[m
+ .github/actions/cache-cargo-build/action.yml       |     49 [32m+[m
+ .github/actions/cache-prisma-binaries/action.yml   |     50 [32m+[m
+ .github/actions/cache-uv-downloads/action.yml      |     25 [32m+[m
+ .github/actions/detect-changes/action.yml          |     41 [32m+[m
+ .github/actions/rust-bridge/action.yml             |     19 [32m+[m
+ .github/actions/setup-uv-with-retries/action.yml   |     46 [32m+[m
+ .../assets/lens-datasets/add-to-dataset-dialog.png |    Bin [31m0[m -> [32m253750[m bytes
+ .../assets/lens-datasets/dataset-case-panel.png    |    Bin [31m0[m -> [32m130981[m bytes
+ .github/assets/lens-datasets/dataset-detail.png    |    Bin [31m0[m -> [32m103560[m bytes
+ .github/assets/lens-datasets/datasets-list.png     |    Bin [31m0[m -> [32m135369[m bytes
+ .github/assets/lens-datasets/old-revision.png      |    Bin [31m0[m -> [32m188419[m bytes
+ .github/assets/lens-datasets/trace-header.png      |    Bin [31m0[m -> [32m265298[m bytes
+ .../assets/lens-result-retries/before-results.jpg  |    Bin [31m0[m -> [32m96388[m bytes
+ .../assets/lens-result-retries/partial-results.jpg |    Bin [31m0[m -> [32m96155[m bytes
+ .../roi-calculator-integrations/after-github.jpg   |    Bin [31m0[m -> [32m79188[m bytes
+ .../after-gitlab-detail-top.jpg                    |    Bin [31m0[m -> [32m80621[m bytes
+ .../after-gitlab-detail.jpg                        |    Bin [31m0[m -> [32m62838[m bytes
+ .../roi-calculator-integrations/after-gitlab.jpg   |    Bin [31m0[m -> [32m88232[m bytes
+ .../roi-calculator-integrations/before-github.jpg  |    Bin [31m0[m -> [32m76521[m bytes
+ .../demo-exit-loading.jpg                          |    Bin [31m0[m -> [32m41173[m bytes
+ .../demo-fallback-live.jpg                         |    Bin [31m0[m -> [32m90390[m bytes
+ .../roi-calculator-integrations/demo-overview.jpg  |    Bin [31m0[m -> [32m97123[m bytes
+ .../roi-calculator-integrations/demo-people.jpg    |    Bin [31m0[m -> [32m98109[m bytes
+ .../roi-calculator-integrations/demo-pr-costs.jpg  |    Bin [31m0[m -> [32m96764[m bytes
+ .../roi-calculator-integrations/demo-pr-detail.jpg |    Bin [31m0[m -> [32m71286[m bytes
+ .../demo-preview-link.jpg                          |    Bin [31m0[m -> [32m83638[m bytes
+ .../demo-with-live-errors.jpg                      |    Bin [31m0[m -> [32m83634[m bytes
+ .../source-race-after.jpg                          |    Bin [31m0[m -> [32m65116[m bytes
+ .../source-race-before.jpg                         |    Bin [31m0[m -> [32m91944[m bytes
+ .../assets/roi-calculator/00-original-setup.png    |    Bin [31m0[m -> [32m82081[m bytes
+ .../assets/roi-calculator/01-connect-github.png    |    Bin [31m0[m -> [32m59037[m bytes
+ .github/assets/roi-calculator/02-repositories.png  |    Bin [31m0[m -> [32m64810[m bytes
+ .../roi-calculator/03-estimator-schedule.png       |    Bin [31m0[m -> [32m71360[m bytes
+ .../assets/roi-calculator/04-backfill-progress.png |    Bin [31m0[m -> [32m48229[m bytes
+ .github/assets/roi-calculator/06-overview.png      |    Bin [31m0[m -> [32m78120[m bytes
+ .../assets/roi-calculator/07-people-unmatched.png  |    Bin [31m0[m -> [32m77064[m bytes
+ .github/assets/roi-calculator/08-match-email.png   |    Bin [31m0[m -> [32m39842[m bytes
+ .../assets/roi-calculator/09-people-matched.png    |    Bin [31m0[m -> [32m71877[m bytes
+ .github/assets/roi-calculator/10-pr-reasoning.png  |    Bin [31m0[m -> [32m95151[m bytes
+ .github/assets/roi-calculator/11-settings.png      |    Bin [31m0[m -> [32m74921[m bytes
+ .github/assets/roi-calculator/12-restart-setup.png |    Bin [31m0[m -> [32m40312[m bytes
+ .../assets/roi-calculator/13-advanced-settings.png |    Bin [31m0[m -> [32m82773[m bytes
+ .../assets/roi-calculator/14-overview-pulls.png    |    Bin [31m0[m -> [32m73989[m bytes
+ .../assets/roi-calculator/15-sample-preview.png    |    Bin [31m0[m -> [32m78264[m bytes
+ .../roi-calculator/16-calculator-sidebar.png       |    Bin [31m0[m -> [32m51268[m bytes
+ .../19-matching-calculator-icons.png               |    Bin [31m0[m -> [32m60252[m bytes
+ .../20-partial-repository-report.png               |    Bin [31m0[m -> [32m58018[m bytes
+ .../21-empty-repository-preserved-report.png       |    Bin [31m0[m -> [32m57106[m bytes
+ .../22-partial-calculation-explanation.png         |    Bin [31m0[m -> [32m66970[m bytes
+ .../23-estimator-outage-preserved-report.png       |    Bin [31m0[m -> [32m55921[m bytes
+ .github/ci-coverage-allowlist.yml                  |    128 [32m+[m
+ .github/codeql/codeql-config.yml                   |     18 [32m+[m
+ .github/dependabot.yaml                            |     13 [32m+[m
+ .github/deploy-on-aws.png                          |    Bin [31m0[m -> [32m4113[m bytes
+ .github/deploy-on-gcp.png                          |    Bin [31m0[m -> [32m4922[m bytes
+ .github/deploy-to-aws.png                          |    Bin [31m0[m -> [32m2854[m bytes
+ .github/e2e-stack/assert_tests_ran.py              |     69 [32m+[m
+ .github/e2e-stack/oidc-profile.sh                  |      5 [32m+[m
+ .github/e2e-stack/start-idp.sh                     |     45 [32m+[m
+ .github/issue-labels.json                          |     58 [32m+[m
+ .github/mutmut-coverage.rc                         |      5 [32m+[m
+ .github/observatory/litellm_config.yaml            |     19 [32m+[m
+ .github/prompts/duplicate-issue-check.md           |     50 [32m+[m
+ .github/prompts/duplicate-issue-check.schema.json  |     20 [32m+[m
+ .github/prompts/issue-classifier.md                |    109 [32m+[m
+ .github/prompts/issue-classifier.schema.json       |     72 [32m+[m
+ .github/screenshots/after_org_assigned.png         |    Bin [31m0[m -> [32m98136[m bytes
+ .github/screenshots/after_org_detail.png           |    Bin [31m0[m -> [32m105246[m bytes
+ .github/screenshots/before_403_error.png           |    Bin [31m0[m -> [32m126198[m bytes
+ .github/screenshots/before_no_org.png              |    Bin [31m0[m -> [32m97528[m bytes
+ .github/scripts/assert_ci_coverage.py              |    728 [32m+[m
+ .github/scripts/assert_workflow_dir_hygiene.py     |    149 [32m+[m
+ .../auto_update_price_and_context_window_file.py   |    319 [32m+[m
+ .github/scripts/detect_changes.sh                  |     42 [32m+[m
+ .github/scripts/e2e_egress_sentinel.py             |    198 [32m+[m
+ .github/scripts/e2e_fetch_fixture_bundle.sh        |     55 [32m+[m
+ .github/scripts/e2e_pack_fixture_bundle.sh         |     36 [32m+[m
+ .github/scripts/read_rc_version.py                 |     44 [32m+[m
+ .github/scripts/run_llm_translation_tests.py       |    439 [32m+[m
+ .github/scripts/run_merge_smoke.py                 |    355 [32m+[m
+ .github/scripts/scan_keywords.py                   |    141 [32m+[m
+ .github/scripts/select_ui_test_scope.sh            |     15 [32m+[m
+ .github/scripts/smoke_test_native_wheel.py         |     68 [32m+[m
+ .github/scripts/uv_sync_with_retries.sh            |     31 [32m+[m
+ .github/scripts/verify_linux_native_wheel.py       |    293 [32m+[m
+ .github/template.yaml                              |     94 [32m+[m
+ .github/workflows/auto-close-duplicates.yml        |     69 [32m+[m
+ .../auto_update_price_and_context_window.yml       |     39 [32m+[m
+ .github/workflows/check-schema-sync.yml            |     62 [32m+[m
+ .github/workflows/codeql.yml                       |     88 [32m+[m
+ .github/workflows/codspeed.yml                     |     98 [32m+[m
+ .github/workflows/compat-matrix-image.yml          |     42 [32m+[m
+ .github/workflows/conventional-commits.yml         |     51 [32m+[m
+ .github/workflows/cost-map-guard.yml               |     43 [32m+[m
+ .github/workflows/create-rc-branch.yml             |     79 [32m+[m
+ .github/workflows/create-release-branch.yml        |     90 [32m+[m
+ .github/workflows/duplicate_issue_check.yml        |    142 [32m+[m
+ .github/workflows/e2e_record_replay.yml            |    237 [32m+[m
+ .github/workflows/guard-fork-dependencies.yml      |    142 [32m+[m
+ .github/workflows/helm_unit_test.yml               |     60 [32m+[m
+ .github/workflows/image-scan.yml                   |    333 [32m+[m
+ .github/workflows/issue-keyword-labeler.yml        |     65 [32m+[m
+ .github/workflows/issue_classifier.yml             |    161 [32m+[m
+ .github/workflows/issue_fixed_comment.yml          |     79 [32m+[m
+ .github/workflows/issue_label_claude_code.yml      |     21 [32m+[m
+ .github/workflows/issue_label_sync.yml             |     72 [32m+[m
+ .github/workflows/lens-install-smoke.yml           |     94 [32m+[m
+ .github/workflows/lens-worker.yml                  |    111 [32m+[m
+ .github/workflows/linear-release.yml               |    131 [32m+[m
+ .github/workflows/mutation-test.yml                |    157 [32m+[m
+ .github/workflows/osv-scan.yml                     |     43 [32m+[m
+ .github/workflows/publish-lint-base-counts.yml     |     96 [32m+[m
+ .github/workflows/required-checks-legacy.yml       |    397 [32m+[m
+ .github/workflows/scorecard.yml                    |     47 [32m+[m
+ .github/workflows/stale.yml                        |     25 [32m+[m
+ .github/workflows/sync-schema.yml                  |     73 [32m+[m
+ .github/workflows/sync-together-ai-models.yml      |     70 [32m+[m
+ .github/workflows/test-e2e-redis-chaos.yml         |    103 [32m+[m
+ .github/workflows/test-linting.yml                 |    655 [32m+[m
+ .github/workflows/test-litellm-ui-build.yml        |     40 [32m+[m
+ .../workflows/test-mcp-dependency-resolution.yml   |    181 [32m+[m
+ .github/workflows/test-mcp-oauth-e2e.yml           |    180 [32m+[m
+ .github/workflows/test-merge-smoke.yml             |    107 [32m+[m
+ .github/workflows/test-rust.yml                    |    203 [32m+[m
+ .github/workflows/test-semgrep.yml                 |     37 [32m+[m
+ .github/workflows/test-terraform-modules.yml       |     59 [32m+[m
+ .github/workflows/test-terraform-provider.yml      |    127 [32m+[m
+ .github/workflows/test-unit.yml                    |   1295 [32m+[m
+ .github/workflows/test-vscode-extension.yml        |     63 [32m+[m
+ .github/workflows/weekly_load_anomaly.yml          |     85 [32m+[m
+ .github/workflows/zizmor.yml                       |     36 [32m+[m
+ .gitignore                                         |    156 [32m+[m
+ .grype.yaml                                        |     13 [32m+[m
+ .npmrc                                             |      5 [32m+[m
+ .semgrep/rules/README.md                           |     22 [32m+[m
+ .../rules/python/reliability/unbounded-memory.yml  |     17 [32m+[m
+ .semgrep/rules/python/unbounded-memory.yml         |     14 [32m+[m
+ .semgrep/rules/security/no-claude-directory.yml    |     18 [32m+[m
+ AGENTS.md                                          |    133 [32m+[m
+ ARCHITECTURE.md                                    |    415 [32m+[m
+ CONTRIBUTING.md                                    |    350 [32m+[m
+ Dockerfile                                         |    184 [32m+[m
+ GEMINI.md                                          |      1 [32m+[m
+ LICENSE                                            |     26 [32m+[m
+ Makefile                                           |    357 [32m+[m
+ README.md                                          |    720 [32m+[m
+ backend/Dockerfile                                 |    110 [32m+[m
+ backend/main.py                                    |     62 [32m+[m
+ backend/routes/__init__.py                         |      0
+ backend/routes/allowlist.py                        |    169 [32m+[m
+ ci_cd/TEST_KEY_PATTERNS.md                         |     40 [32m+[m
+ ci_cd/baseline_db.py                               |     60 [32m+[m
+ ci_cd/check_file_length.py                         |     28 [32m+[m
+ ci_cd/check_files_match.py                         |     32 [32m+[m
+ ci_cd/cost_map_guard.py                            |    169 [32m+[m
+ ci_cd/generate_model_prices_schema.py              |    409 [32m+[m
+ ci_cd/run_migration.py                             |    390 [32m+[m
+ ci_cd/security_scans_readme.md                     |      9 [32m+[m
+ codecov.yaml                                       |    151 [32m+[m
+ cookbook/Benchmarking_LLMs_by_use_case.ipynb       |    753 [32m+[m
+ ...nthropic)_with_Streaming_liteLLM_Examples.ipynb |    406 [32m+[m
+ cookbook/Evaluating_LLMs.ipynb                     |    579 [32m+[m
+ cookbook/LiteLLM_Azure_and_OpenAI_example.ipynb    |    422 [32m+[m
+ cookbook/LiteLLM_Bedrock.ipynb                     |    310 [32m+[m
+ cookbook/LiteLLM_CometAPI.ipynb                    |    474 [32m+[m
+ cookbook/LiteLLM_Comparing_LLMs.ipynb              |    441 [32m+[m
+ cookbook/LiteLLM_Completion_Cost.ipynb             |    241 [32m+[m
+ cookbook/LiteLLM_HuggingFace.ipynb                 |    252 [32m+[m
+ cookbook/LiteLLM_NovitaAI_Cookbook.ipynb           |     97 [32m+[m
+ cookbook/LiteLLM_OpenRouter.ipynb                  |    179 [32m+[m
+ cookbook/LiteLLM_Petals.ipynb                      |    568 [32m+[m
+ cookbook/LiteLLM_PromptLayer.ipynb                 |    130 [32m+[m
+ cookbook/LiteLLM_User_Based_Rate_Limits.ipynb      |    224 [32m+[m
+ cookbook/LiteLLM_batch_completion.ipynb            |    163 [32m+[m
+ ...to_LiteLLM_Proxy_from_OpenAI_Azure_OpenAI.ipynb |    568 [32m+[m
+ cookbook/Parallel_function_calling.ipynb           |    478 [32m+[m
+ cookbook/Proxy_Batch_Users.ipynb                   |    208 [32m+[m
+ cookbook/TogetherAI_liteLLM.ipynb                  |   1006 [32m+[m
+ ...Using_Nemo_Guardrails_with_LiteLLM_Server.ipynb |    157 [32m+[m
+ cookbook/VLLM_Model_Testing.ipynb                  |    404 [32m+[m
+ .../claude_code_quickstart/guide.md                |    294 [32m+[m
+ cookbook/ai_coding_tool_guides/index.json          |    134 [32m+[m
+ cookbook/anthropic_agent_sdk/README.md             |    150 [32m+[m
+ cookbook/anthropic_agent_sdk/agent_with_mcp.py     |    144 [32m+[m
+ cookbook/anthropic_agent_sdk/common.py             |    164 [32m+[m
+ cookbook/anthropic_agent_sdk/config.example.yaml   |     25 [32m+[m
+ cookbook/anthropic_agent_sdk/main.py               |     99 [32m+[m
+ cookbook/anthropic_agent_sdk/requirements.txt      |      2 [32m+[m
+ cookbook/benchmark/benchmark.py                    |     90 [32m+[m
+ .../eval_suites_mlflow_autoevals/auto_evals.py     |     30 [32m+[m
+ cookbook/benchmark/readme.md                       |    181 [32m+[m
+ cookbook/codellama-server/README.MD                |    153 [32m+[m
+ cookbook/codellama-server/imgs/code-output.png     |    Bin [31m0[m -> [32m238123[m bytes
+ .../codellama-server/imgs/promptlayer_logging.png  |    Bin [31m0[m -> [32m300105[m bytes
+ cookbook/codellama-server/main.py                  |    102 [32m+[m
+ cookbook/community-resources/get_hf_models.py      |     89 [32m+[m
+ cookbook/community-resources/max_tokens.json       |     93 [32m+[m
+ cookbook/gollem_go_agent_framework/README.md       |    119 [32m+[m
+ cookbook/gollem_go_agent_framework/basic/main.go   |     41 [32m+[m
+ cookbook/gollem_go_agent_framework/go.mod          |      5 [32m+[m
+ cookbook/gollem_go_agent_framework/go.sum          |      2 [32m+[m
+ .../gollem_go_agent_framework/proxy_config.yaml    |     16 [32m+[m
+ .../gollem_go_agent_framework/streaming/main.go    |     56 [32m+[m
+ cookbook/gollem_go_agent_framework/tools/main.go   |     64 [32m+[m
+ cookbook/google_adk_litellm_tutorial.ipynb         |    412 [32m+[m
+ cookbook/liteLLM_A121_Jurrasic_example.ipynb       |    251 [32m+[m
+ cookbook/liteLLM_Baseten.ipynb                     |    146 [32m+[m
+ cookbook/liteLLM_Getting_Started.ipynb             |    411 [32m+[m
+ cookbook/liteLLM_IBM_Watsonx.ipynb                 |    300 [32m+[m
+ cookbook/liteLLM_Langchain_Demo.ipynb              |    195 [32m+[m
+ cookbook/liteLLM_Ollama.ipynb                      |    289 [32m+[m
+ cookbook/liteLLM_Replicate_Demo.ipynb              |    238 [32m+[m
+ cookbook/liteLLM_Streaming_Demo.ipynb              |    226 [32m+[m
+ cookbook/liteLLM_VertextAI_Example.ipynb           |    199 [32m+[m
+ cookbook/liteLLM_clarifai_Demo.ipynb               |    187 [32m+[m
+ cookbook/liteLLM_function_calling.ipynb            |    331 [32m+[m
+ cookbook/litellm-ollama-docker-image/Dockerfile    |     25 [32m+[m
+ .../litellm-ollama-docker-image/requirements.txt   |      1 [32m+[m
+ cookbook/litellm-ollama-docker-image/start.sh      |      2 [32m+[m
+ cookbook/litellm_Test_Multiple_Providers.ipynb     |    571 [32m+[m
+ cookbook/litellm_model_fallback.ipynb              |     51 [32m+[m
+ .../batch_api/bedrock/bedrock.py                   |     27 [32m+[m
+ .../bedrock/bedrock_batch_completions.jsonl        |    128 [32m+[m
+ .../braintrust_prompt_wrapper_README.md            |    279 [32m+[m
+ .../braintrust_prompt_wrapper_server.py            |    274 [32m+[m
+ cookbook/litellm_proxy_server/cli_token_usage.py   |     63 [32m+[m
+ .../dashboard_all_metrics/grafana_dashboard.json   |   6608 [32m+[m
+ .../dashboard_all_metrics/readme.md                |     11 [32m+[m
+ .../dashboard_genai_otel/grafana_dashboard.json    |    523 [32m+[m
+ .../dashboard_genai_otel/readme.md                 |     35 [32m+[m
+ .../dashboard_v2/grafana_dashboard.json            |    827 [32m+[m
+ .../grafana_dashboard/readme.md                    |     24 [32m+[m
+ .../mcp/mcp_with_litellm_proxy.py                  |     39 [32m+[m
+ cookbook/litellm_proxy_server/readme.md            |    177 [32m+[m
+ .../custom_secret_manager_config.yaml              |     20 [32m+[m
+ .../secret_manager/my_secret_manager.py            |     80 [32m+[m
+ cookbook/litellm_router/error_log.txt              |   1004 [32m+[m
+ cookbook/litellm_router/load_test_proxy.py         |    148 [32m+[m
+ cookbook/litellm_router/load_test_queuing.py       |    164 [32m+[m
+ cookbook/litellm_router/load_test_router.py        |    143 [32m+[m
+ cookbook/litellm_router/request_log.txt            |     48 [32m+[m
+ cookbook/litellm_router/response_log.txt           |      0
+ .../litellm_router/test_questions/question1.txt    |     43 [32m+[m
+ .../litellm_router/test_questions/question2.txt    |     65 [32m+[m
+ .../litellm_router/test_questions/question3.txt    |     50 [32m+[m
+ .../memory_usage/router_endpoint

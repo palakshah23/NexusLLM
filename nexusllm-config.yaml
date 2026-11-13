@@ -1,0 +1,29 @@
+model_list:
+  - model_name: groq-llama
+    litellm_params:
+      model: groq/openai/gpt-oss-120b
+      api_key: os.environ/GROQ_API_KEY
+
+litellm_settings:
+  callbacks:
+  - gateway.services.routing_callback.proxy_handler_instance
+
+model_list:
+  - model_name: groq-llama
+    litellm_params:
+      model: groq/openai/gpt-oss-120b
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: groq-cheap
+    litellm_params:
+      model: groq/openai/gpt-oss-20b
+      api_key: os.environ/GROQ_API_KEY
+
+  - model_name: groq-quality
+    litellm_params:
+      model: groq/qwen/qwen3.8-27b
+      api_key: os.environ/GROQ_API_KEY
+
+litellm_settings:
+  callbacks:
+    - gateway.services.routing_callback.proxy_handler_instance
